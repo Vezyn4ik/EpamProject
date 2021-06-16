@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java/company" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/main/java/company/Controller/Controller.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/company/DAO/EntityMapper.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/company/DAO/EntityMapper.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/company/Path.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/company/Services/Command.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/company/Services/command/CommandContainer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/company/Services/command/ListMenuCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/company/Services/command/ListOrdersCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/company/Services/command/LoginCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/company/Services/command/LogoutCommand" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/company/Services/command/LogoutCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/company/Services/command/NoCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/company/Services/command/UpdateSettingsCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/company/Services/command/ViewSettingsCommand.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/company/web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/META-INF" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/web/WEB-INF" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/web/WEB-INF/jspf/head.jspf" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/entry" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/web/login.jsp" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/web/style" charset="windows-1251" />
+  </component>
+</project>
