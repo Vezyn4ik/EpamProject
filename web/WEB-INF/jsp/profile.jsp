@@ -7,7 +7,6 @@
         Profile
     </title>
     <link rel="stylesheet" type="text/css" media="screen" href="../../style/profile.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="../../style/header.css"/>
     <script type="text/javascript">
         function func() {
             if (document.getElementById("settings_form").style.display === "none") {
@@ -179,6 +178,7 @@
                                 <input type="hidden" name="command" value="lock"/>
                                 <input type="hidden" name="account" value="${account.id}"/>
                                 <input type="hidden" name="type" value="account"/>
+                                <input type="hidden" name="page" value="profile"/>
                                 <p>
                                     <button type="submit" class="btn btn-danger"><fmt:message
                                             key="profile_jsp.button.block"/></button>
@@ -190,6 +190,7 @@
                                     <input type="hidden" name="command" value="unlock"/>
                                     <input type="hidden" name="account" value="${account.id}"/>
                                     <input type="hidden" name="type" value="account"/>
+                                    <input type="hidden" name="page" value="profile"/>
                                     <p>
                                         <button type="submit" class="btn btn-success"><fmt:message
                                                 key="profile_jsp.button.unblock"/></button>

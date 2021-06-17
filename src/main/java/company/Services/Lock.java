@@ -20,15 +20,31 @@ public class Lock extends Command{
             Account account = new AccountDao().findById(Long.valueOf(request.getParameter("account")));
             account.setState(State.LOCKED);
             new AccountDao().update(account);
-            return new UserProfile().execute(request, response);
         }
         else if(type.equals("user")){
             System.out.println("User req:" + request.getParameter("userId"));
             User user=new UserDao().findUser(Long.valueOf(request.getParameter("userId")));
+            request.setAttribute("userId",user.getId());
             user.setState(State.LOCKED);
             new UserDao().updateUser(user);
-            return new ListUsers().execute(request, response);
+            System.out.println(request.getParameter("userId"));
         }
-        return null;
+        System.out.println(request.getParameter("userId"));
+        return selectPage(request,response);
+    }
+    private String selectPage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String page= request.getParameter("page");
+        switch (page){
+            case "profile":
+                return new UserProfile().execute(request, response);
+            case "list_users":
+                return new ListUsers().execute(request, response);
+            case "user_data":
+                System.out.println(request.getParameter("userId"));
+                return new UserData().execute(request,response);
+            default:
+                return null;
+
+        }
     }
 }

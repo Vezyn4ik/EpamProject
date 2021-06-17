@@ -34,11 +34,11 @@
                             <td>${user.createTime}</td>
                             <td>${user.state}</td>
                             <td><c:if test="${user.state=='LOCKED'}">
-                                    <a class="btn btn-success"  href="controller?command=unlock&type=user&userId=${user.id}">
+                                    <a class="btn btn-success"  href="controller?command=unlock&type=user&userId=${user.id}&page=list_users">
                                         <fmt:message key="list_users_jsp.button.unlock"/></a>
                             </c:if></td>
                             <td><c:if test="${user.state=='UNLOCKED'}">
-                                    <a class="btn btn-danger"  href="controller?command=lock&type=user&userId=${user.id}">
+                                    <a class="btn btn-danger"  href="controller?command=lock&type=user&userId=${user.id}&page=list_users">
                                         <fmt:message key="list_users_jsp.button.lock"/></a>
                             </c:if>
                             </td>

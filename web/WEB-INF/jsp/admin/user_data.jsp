@@ -4,9 +4,9 @@
 
 <html>
 
-<c:set var="title" value="List orders" scope="page"/>
+<c:set var="title" value="user_data" scope="page"/>
 <%@ include file="../../jspf/head.jspf" %>
-
+<link rel="stylesheet" type="text/css" media="screen" href="../../style/profile.css"/>
 <body>
 <div>
     <%@ include file="../../jspf/header.jspf" %>
@@ -19,15 +19,11 @@
                 <p><fmt:message key="register_jsp.label.birth"/> ${viewedUser.birth}</p>
 
             </div>
-            <<c:if test="${viewedUser.state=='LOCKED'}">
-            <button  class="btn btn-success">
-                <a href="controller?command=unlock&type=user&userId=${viewedUser.id}"> Разблокировать</a>
-            </button>
+            <c:if test="${viewedUser.state=='LOCKED'}">
+                <a class="btn btn-success" href="controller?command=unlock&type=user&userId=${viewedUser.id}&page=user_data"> Разблокировать</a>
         </c:if>
             <c:if test="${viewedUser.state=='UNLOCKED'}">
-                <button class="btn btn-danger">
-                    <a href="controller?command=lock&type=user&userId=${viewedUser.id}"> Заблокировать</a>
-                </button>
+                    <a class="btn btn-danger" href="controller?command=lock&type=user&userId=${viewedUser.id}&page=user_data"> Заблокировать</a>
             </c:if>
             <c:choose>
                 <c:when test="${fn:length(accountList) == 0}">No such accounts</c:when>
@@ -54,17 +50,18 @@
                                 <td>${account.balance}</td>
                                 <td>${account.state}</td>
                                 <td><c:if test="${account.state=='LOCKED'}">
-                                    <button>
-                                        <a href="controller?command=unlock&type=account&account=${account.id}">
+                                        <a class="btn btn-success" href="controller?command=unlock&type=account&account=${account.id}&userId=${viewedUser.id}&page=user_data">
                                             Разблокировать</a>
-                                    </button>
-                                </c:if></td>
-
-                                <td><c:if test="${account.state=='UNLOCKED'}">
-                                    <button>
-                                        <a href="controller?command=lock&type=account&account=${account.id}"> Заблокировать</a>
-                                    </button>
                                 </c:if>
+
+                                <c:if test="${account.state=='UNLOCKED'}">
+
+                                        <a class="btn btn-danger" href="controller?command=lock&type=account&account=${account.id}&userId=${viewedUser.id}&page=user_data"> Заблокировать</a>
+                                </c:if>
+                                </td>
+                                <td>
+                                    <a class="btn btn-info"  href="controller?command=lock&type=user&userId=${user.id}&page=list_users">
+                                        <fmt:message key="list_users_jsp.button.lock"/></a>
                                 </td>
                             </tr>
                         </c:forEach>

@@ -20,15 +20,27 @@ public class Unlock extends Command{
             Account account = new AccountDao().findById(Long.valueOf(request.getParameter("account")));
             account.setState(State.UNLOCKED);
             new AccountDao().update(account);
-            return new UserProfile().execute(request, response);
         }
         else if(type.equals("user")){
             System.out.println("User req:" + request.getParameter("userId"));
             User user=new UserDao().findUser(Long.valueOf(request.getParameter("userId")));
             user.setState(State.UNLOCKED);
             new UserDao().updateUser(user);
-            return new ListUsers().execute(request, response);
         }
-        return null;
+        return selectPage(request,response);
+    }
+    private String selectPage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String page= request.getParameter("page");
+        switch (page){
+            case "profile":
+                return new UserProfile().execute(request, response);
+            case "list_users":
+                return new ListUsers().execute(request, response);
+            case "user_data":
+                return new UserData().execute(request,response);
+            default:
+                return null;
+
+        }
     }
 }
