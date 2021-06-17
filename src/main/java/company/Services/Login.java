@@ -33,7 +33,7 @@ public class Login extends Command {
         System.out.println("Request parameter: password --> " + password);
         // error handler
         String errorMessage = null;
-        String forward = Path.PAGE_ERROR_PAGE;
+        String forward = Path.PAGE_LOGIN;
 
         if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
             errorMessage = "Login/password cannot be empty";

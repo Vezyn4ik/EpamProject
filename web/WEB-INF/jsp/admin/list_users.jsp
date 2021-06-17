@@ -12,7 +12,7 @@
 <div class="card my-5">
     <div class="card-body">
         <c:choose>
-            <c:when test="${fn:length(userList) == 0}">No such users</c:when>
+            <c:when test="${fn:length(userList) == 0}"><fmt:message key="list_users_jsp.label.no_users"/></c:when>
             <c:otherwise>
                 <table class="table table-bordered table-striped">
                     <thead class="thead-dark">

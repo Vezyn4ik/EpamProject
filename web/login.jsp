@@ -24,11 +24,12 @@
                    placeholder="<fmt:message key="login_jsp.input.password"/>" required/>
             <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message
                     key="login_jsp.button.login"/></button>
-            <!--<div *ngIf="this.error" class="alert alert-danger"> Неверный логин или пароль! </div>-->
             <a href="controller?command=toRegister" class="btn btn-lg btn-primary btn-block">
                 <fmt:message key="login_jsp.button.register"/>
             </a>
-
+            <c:if test="${not empty errorMessage}">
+            <div class="alert alert-danger"> ${errorMessage} </div>
+            </c:if>
         </form>
     </div>
 </div>
