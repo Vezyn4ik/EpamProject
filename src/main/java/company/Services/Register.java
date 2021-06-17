@@ -45,7 +45,7 @@ public class Register extends Command {
         user.setEmail(email);
 
         if (new UserDao().insertUser(user)) {
-            forward = Path.ACCOUNT;
+            forward = Path.PAGE_LOGIN;
         }
 
         return forward;

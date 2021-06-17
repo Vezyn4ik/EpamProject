@@ -29,7 +29,6 @@ public class CommandContainer {
 		commands.put("payments",new Payments());
 		commands.put("lock",new Lock());
 		commands.put("unlock",new Unlock());
-		commands.put("pdf",new Pdf());
 		commands.put("makePayment",new MakePayment());
 		commands.put("toMakePayment",new ToMakePayment());
 		commands.put("userData", new UserData());

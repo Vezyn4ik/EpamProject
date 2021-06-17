@@ -19,7 +19,6 @@ public class MakePayment extends Command{
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
 
-
         String recipient_account = request.getParameter("recipient_account");
         System.out.println("Request parameter: recipient_account --> " + recipient_account);
 
@@ -38,7 +37,8 @@ public class MakePayment extends Command{
         // error handler
         String errorMessage = null;
         String forward = Path.PAGE_ERROR_PAGE;
-        if(amount*1.01>account.getBalance() || amount>account.getLimit()||account.getName().equals(recipient_name)){
+        if(amount*1.01>account.getBalance() || amount>account.getLimit()
+                ||account.getName().equals(recipient_account) || account.state==State.LOCKED){
             return forward;
         }
         Payment payment=new Payment();
@@ -53,13 +53,13 @@ public class MakePayment extends Command{
         payment.setStatus(Status.PREPARED);
 
         if(new PaymentDao().insert(payment)){
-            account.setBalance(account.getBalance()-amount*1.01);
+            account.withdrawal(amount*1.01);
             new AccountDao().update(account);
             forward=Path.ACCOUNT;
         }
         Account recipient=new AccountDao().findByName(payment.getRecipientAccount());
         if(recipient!=null){
-            recipient.setBalance(recipient.getBalance()+payment.getAmount()*1.01);
+            recipient.replenishment(payment.getAmount());
             new AccountDao().update(recipient);
         }
         return forward;

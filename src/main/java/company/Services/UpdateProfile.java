@@ -46,6 +46,12 @@ public class UpdateProfile extends Command{
             updateUser = true;
         }
 
+        String email = request.getParameter("email");
+        if (email != null && !email.isEmpty()) {
+            user.setEmail(email);
+            updateUser = true;
+        }
+
         String localeToSet = request.getParameter("localeToSet");
         if (localeToSet != null && !localeToSet.isEmpty()) {
             HttpSession session = request.getSession();
@@ -53,9 +59,9 @@ public class UpdateProfile extends Command{
             session.setAttribute("defaultLocale", localeToSet);
         }
 
-        if (updateUser)
+        if (updateUser) {
             new UserDao().updateUser(user);
-
-        return Path.ACCOUNT;
+        }
+        return Path.COMMAND_USER_ACCOUNT;
     }
 }

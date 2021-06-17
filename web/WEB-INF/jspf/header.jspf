@@ -8,6 +8,22 @@ Header (top area).
     <div class="wrap">
         <div class="account_desc">
             <ul>
+                <c:choose>
+                    <c:when test="${user.getRole() == 'ADMIN' }">
+                        <li>
+                            <a href="controller?command=listUsers">
+                                <fmt:message key="header_jspf.button.listUsers"/>
+                            </a> &nbsp;
+                        </li>
+                    </c:when>
+                    <c:when test="${user.getRole()  == 'USER'}">
+                        <li>
+                            <a href="controller?command=toMakePayment">
+                                <fmt:message key="header_jspf.button.makePayment"/>
+                            </a> &nbsp;
+                        </li>
+                    </c:when>
+                </c:choose>
                 <c:if test="${empty user and title ne 'Login'}">
                     <li><a href="../../../login.jsp">
                         <fmt:message key="header_jspf.button.login"/>
@@ -23,38 +39,6 @@ Header (top area).
             </ul>
         </div>
         <div class="clear"></div>
-        <c:if test="${not empty user}">
-        <div class="header_bottom">
-                <nav>
-                    <div class="menu">
-                        <ul class="list-inline ">
-                            <c:choose>
-                                <c:when test="${user.getRole() == 'ADMIN' }">
-                                    <li class="list-inline-item">
-                                        <a href="controller?command=listUsers">
-                                            <fmt:message key="header_jspf.button.listUsers"/>
-                                        </a> &nbsp;
-                                    </li>
-                                </c:when>
-                               <c:when test="${user.getRole()  == 'USER'}">
-                                    <li class="list-inline-item">
-                                        <a href="controller?command=toMakePayment">
-                                            <fmt:message key="header_jspf.button.makePayment"/>
-                                        </a> &nbsp;
-                                    </li>
-                                </c:when>
-                            </c:choose>
-                            <li class="list-inline-item">
-                                <a href="controller?command=userAccount">
-                                    <fmt:message key="header_jspf.button.profile"/>
-                                </a> &nbsp;
-                            </li>
-                            <div class="clear"></div>
-                        </ul>
-                    </div>
-                </nav>
-        </div>
-        </c:if>
     </div>
     <div class="clear"></div>
 </div>

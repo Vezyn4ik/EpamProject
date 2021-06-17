@@ -8,45 +8,40 @@
 <%@ include file="../../jspf/head.jspf" %>
 
 <body>
-<table id="main-container">
-
+<div>
     <%@ include file="../../jspf/header.jspf" %>
-
-    <tr>
-        <%-- CONTENT --%>
-        <td class="content">
+</div>
+<div class="card my-5">
+    <div class="card-body">
             <div class="cards">
                 <p style="width:100%"><fmt:message key="register_jsp.label.login"/>: ${viewedUser.login} </p>
                 <p class="title">${viewedUser.name} ${viewedUser.surname}</p>
                 <p><fmt:message key="register_jsp.label.birth"/> ${viewedUser.birth}</p>
-                <p><fmt:message key="account_jsp.label.registerTime"/> ${viewedUser.createTime}</p>
+
             </div>
             <<c:if test="${viewedUser.state=='LOCKED'}">
-            <button>
+            <button  class="btn btn-success">
                 <a href="controller?command=unlock&type=user&userId=${viewedUser.id}"> Разблокировать</a>
             </button>
         </c:if>
-
             <c:if test="${viewedUser.state=='UNLOCKED'}">
-                <button>
+                <button class="btn btn-danger">
                     <a href="controller?command=lock&type=user&userId=${viewedUser.id}"> Заблокировать</a>
                 </button>
             </c:if>
-        </td>
-        <td>
             <c:choose>
                 <c:when test="${fn:length(accountList) == 0}">No such accounts</c:when>
 
                 <c:otherwise>
-                    <table id="list_account_table">
-                        <thead>
+                    <table class="table table-bordered table-striped">
+                        <thead class="thead-dark">
                         <tr>
-                            <td>name</td>
-                            <td>create time</td>
-                            <td>limit</td>
-                            <td>currency</td>
-                            <td>balance</td>
-                            <td>state</td>
+                            <th>name</th>
+                            <th>create time</th>
+                            <th>limit</th>
+                            <th>currency</th>
+                            <th>balance</th>
+                            <th>state</th>
                         </tr>
                         </thead>
 
@@ -76,11 +71,7 @@
                     </table>
                 </c:otherwise>
             </c:choose>
-
-            <%-- CONTENT --%>
-        </td>
-    </tr>
-    <%@ include file="../../jspf/footer.jspf" %>
-</table>
+    </div>
+</div>
 </body>
 </html>

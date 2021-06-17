@@ -3,6 +3,7 @@ package company.Services;
 import company.DAO.AccountDao;
 import company.DAO.PaymentDao;
 import company.Entity.Account;
+import company.Entity.State;
 import company.Entity.User;
 import company.Path;
 
@@ -21,7 +22,9 @@ public class ToMakePayment extends Command{
 
         // put user order beans list to request
         request.setAttribute("user", user);
-        request.setAttribute("accounts",new AccountDao().findAllByUser(user));
+        List<Account> accounts= new AccountDao().findAllByUser(user);
+        accounts.removeIf(account -> account.state == State.LOCKED);
+        request.setAttribute("accounts",accounts);
         request.setAttribute("categories",new PaymentDao().findAllCategories());
         return Path.TO_MAKE_PAYMENT;
     }

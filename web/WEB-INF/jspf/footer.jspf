@@ -1,9 +1,0 @@
-<%--=========================================================================== 
-Footer (bottom area). 
-===========================================================================--%> 
-
-<div style="
-		text-align: center;
-		background: #AAAAFF;">
-		&copy;VIP Restaurant (ST4Example, EPAM-KNURE Java Training), 2021
-</div>

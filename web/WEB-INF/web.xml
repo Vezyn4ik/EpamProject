@@ -38,4 +38,8 @@
     <servlet-name>Controller</servlet-name>
     <url-pattern>/controller</url-pattern>
   </servlet-mapping>
+
+  <listener>
+    <listener-class>company.web.listener.ContextListener</listener-class>
+  </listener>
 </web-app>

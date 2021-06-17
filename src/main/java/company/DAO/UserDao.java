@@ -17,7 +17,7 @@ public class UserDao {
             "SELECT * FROM user WHERE id=?";
 
     private static final String SQL_UPDATE_USER =
-            "UPDATE user SET name=?, surname=?,birth=?, password=? ,`state`=?,email=? WHERE id=?";
+            "UPDATE `user` SET `name`=?, surname=?,birth=?, password=? ,`state`=?,email=? WHERE id=?";
 
     private static final String SQL_FIND_ALL_USERS="Select * from user where role ='USER'";
     private static final String SQL_INSERT_USER=
@@ -128,21 +128,24 @@ public class UserDao {
         try {
             con = DBManager.getInstance().getConnection();
             PreparedStatement pstmt = con.prepareStatement(SQL_UPDATE_USER);
-            int k = 1;
-            pstmt.setString(k++, user.getName());
-            pstmt.setString(k++, user.getSurname());
-            pstmt.setDate(k++, user.getBirth());
-            pstmt.setString(k++, user.getPassword());
-            pstmt.setString(k++, user.getState().name());
-            pstmt.setLong(k++, user.getId());
-            pstmt.setString(k++, user.getEmail());
-            pstmt.executeUpdate();
-            pstmt.close();
+            pstmt.setString(1, user.getName());
+            pstmt.setString(2, user.getSurname());
+            pstmt.setDate(3, user.getBirth());
+            pstmt.setString(4, user.getPassword());
+            pstmt.setString(5, user.getState().name());
+            pstmt.setString(6, user.getEmail());
+            pstmt.setLong(7, user.getId());
+
+            System.out.println("UpdateUser1");
+            if (pstmt.executeUpdate() > 0) {
+                System.out.println("UpdateUser2");
+            }
+            con.commit();
+            con.close();
         } catch (SQLException ex) {
+            assert con != null;
             DBManager.getInstance().rollbackAndClose(con);
             ex.printStackTrace();
-        } finally {
-            DBManager.getInstance().commitAndClose(con);
         }
     }
 

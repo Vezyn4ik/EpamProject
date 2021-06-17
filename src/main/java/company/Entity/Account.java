@@ -13,6 +13,18 @@ public class Account {
     public Requisites requisites;
     public State state;
 
+    public void replenishment(double sum){
+        if(sum>=0) {
+            this.balance += sum;
+        }
+    }
+
+    public void withdrawal (double sum){
+        if(sum>=0) {
+            this.balance -= sum;
+        }
+    }
+
     public State getState() {
 
         return state;

@@ -11,8 +11,8 @@
 </head>
 <body>
 
+<div class="wrapper">
 <div class="container">
-    <div class="wrapper">
         <form id="login_form" action="controller" method="post" class="form-signin">
             <input type="hidden" name="command" value="login"/>
             <h3 class="form-signin-heading"><fmt:message key="login_jsp.label.welcome"/></h3>
@@ -30,7 +30,6 @@
             </a>
 
         </form>
-        <%@ include file="./WEB-INF/jspf/footer.jspf" %>
     </div>
 </div>
 </body>
