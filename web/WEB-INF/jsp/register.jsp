@@ -47,7 +47,7 @@
                     </div>
                     <div class="form-group">
                         <label for="telephone"><fmt:message key="register_jsp.label.telephone"/></label>
-                        <input class="form-control" id="telephone" name="telephone"
+                        <input class="form-control" id="telephone" name="telephone" maxlength="12" minlength="12"
                                placeholder="<fmt:message key="register_jsp.placeholder.telephone"/>" required
                                type="tel">
                     </div>

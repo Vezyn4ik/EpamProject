@@ -108,6 +108,9 @@
                         </button>
                     </div>
                 </fieldset>
+                <c:if test="${not empty errorMessage}">
+                    <div class="alert alert-danger"> ${errorMessage} </div>
+                </c:if>
             </form>
         </c:if>
     </div>

@@ -33,12 +33,12 @@
                             <td>${user.login}</td>
                             <td>${user.createTime}</td>
                             <td>${user.status}</td>
-                            <td><c:if test="${user.state=='LOCKED'}">
+                            <td><c:if test="${user.status=='LOCKED'}">
                                 <a class="btn btn-success"
                                    href="controller?command=unlock&type=user&userId=${user.id}&page=list_users">
                                     <fmt:message key="list_users_jsp.button.unlock"/></a>
                             </c:if></td>
-                            <td><c:if test="${user.state=='UNLOCKED'}">
+                            <td><c:if test="${user.status=='UNLOCKED'}">
                                 <a class="btn btn-danger"
                                    href="controller?command=lock&type=user&userId=${user.id}&page=list_users">
                                     <fmt:message key="list_users_jsp.button.lock"/></a>
