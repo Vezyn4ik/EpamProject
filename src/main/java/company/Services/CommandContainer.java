@@ -33,12 +33,7 @@ public class CommandContainer {
 		commands.put("toMakePayment",new ToMakePayment());
 		commands.put("userData", new UserData());
 		commands.put("listUsers",new ListUsers());
-
-		// client commands
-	//	commands.put("listMenu", new ListMenuCommand());
-
-		// admin commands
-		//commands.put("listOrders", new ListOrdersCommand());
+		commands.put("apps",new Applications());
 
 		log.debug("Command container was successfully initialized");
 		log.trace("Number of commands --> " + commands.size());

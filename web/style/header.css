@@ -25,6 +25,13 @@
     font-family: 'ambleregular';
 }
 
+.account_desc li form {
+    font-size: 0.823em;
+    color: #9C9C9C;
+    padding: 0 10px;
+    font-family: 'ambleregular';
+}
+
 .account_desc li a:hover {
     color: #E4292F;
 }
@@ -33,38 +40,6 @@
     background: #383838;
     border-radius: 6px;
     width: 100%;
-}
-
-.menu {
-    background: #383838;
-    float: left;
-}
-
-.menu li {
-    float: left;
-}
-
-.menu li a {
-    float: left;
-    font-family: 'ambleregular';
-    font-size: 0.823em;
-    text-transform: uppercase;
-    color: #fff;
-    display: block;
-    padding: 16px 20px;
-    border-right: 2px ridge #585858;
-    transition: all 1s;
-}
-
-.menu li a:hover, .menu li.active a {
-    background: #B81D22;
-    color: #000000;
-    font-size: 1em;
-    font-weight: bold
-}
-
-.menu li:first-child a {
-    border-radius: 6px 0 0 6px;
 }
 
 h1, h2, h3, h4, h5, h6, p, a, img, ol, nav ul, nav li, form, label, article, aside, footer, header, menu, nav, section {
@@ -92,8 +67,4 @@ a {
 
 .left {
     float: left;
-}
-
-img {
-    max-width: 100%;
 }

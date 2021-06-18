@@ -1,5 +1,5 @@
 package company.Entity;
 
 public enum State {
-    LOCKED,UNLOCKED
+    LOCKED,UNLOCKED,WAITING
 }

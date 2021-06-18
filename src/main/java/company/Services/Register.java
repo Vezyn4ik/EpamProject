@@ -22,10 +22,10 @@ public class Register extends Command {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String telephone = request.getParameter("telephone");
-        String email = request.getParameter("telephone");
+        String email = request.getParameter("email");
         // error handler
         String errorMessage = null;
-        String forward = Path.PAGE_ERROR_PAGE;
+        String forward = Path.TO_REGISTER;
 
         if (new UserDao().findUserByLogin(login) != null) {
             errorMessage = "User with such login is exists";

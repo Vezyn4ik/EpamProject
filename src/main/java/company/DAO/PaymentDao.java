@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PaymentDao {
     private static final String SQL_ADD_PAYMENT =
-            "INSERT INTO `payment`(fk_account,status,`date`,purpose,fk_category,amount,commission,recipient_account,recipient_name) values(?,?,?,?,?,?,?,?,?)";
+            "INSERT INTO `payment`(fk_account,`date`,purpose,fk_category,amount,commission,recipient_account,recipient_name) values(?,?,?,?,?,?,?,?)";
 
     public List<Payment> findAllByAccount(Account account){
         List<Payment> result=new ArrayList<>();
@@ -46,7 +46,6 @@ public class PaymentDao {
             Payment payment = new Payment();
             payment.setId(rs.getLong("id"));
             payment.setAccount(new AccountDao().findById(rs.getLong("fk_account")));
-            payment.setStatus(Status.valueOf(rs.getString("status")));
             payment.setDate(rs.getTimestamp("date"));
             payment.setPurpose(rs.getString("purpose"));
             payment.setCategory(findCategoryById(rs.getLong("fk_category")));
@@ -92,14 +91,13 @@ public class PaymentDao {
                      Statement.RETURN_GENERATED_KEYS)
         ) {
             stmp.setLong(1,payment.getAccount().getId());
-            stmp.setString(2, payment.getStatus().name());
-            stmp.setTimestamp(3,payment.getDate());
-            stmp.setString(4,payment.getPurpose());
-            stmp.setLong(5,payment.getCategory().getId());
-            stmp.setDouble(6,payment.getAmount());
-            stmp.setDouble(7,payment.getCommission());
-            stmp.setString(8,payment.getRecipientAccount());
-            stmp.setString(9,payment.getRecipientName());
+            stmp.setTimestamp(2,payment.getDate());
+            stmp.setString(3,payment.getPurpose());
+            stmp.setLong(4,payment.getCategory().getId());
+            stmp.setDouble(5,payment.getAmount());
+            stmp.setDouble(6,payment.getCommission());
+            stmp.setString(7,payment.getRecipientAccount());
+            stmp.setString(8,payment.getRecipientName());
             if (stmp.executeUpdate() > 0) {
                 try(ResultSet rs = stmp.getGeneratedKeys()) {
                     if (rs.next()) {

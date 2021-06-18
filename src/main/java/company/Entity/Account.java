@@ -10,7 +10,6 @@ public class Account {
     public String name;
     public Double limit;
     public String currency;
-    public Requisites requisites;
     public State state;
 
     public void replenishment(double sum){
@@ -90,14 +89,6 @@ public class Account {
         this.currency = currency;
     }
 
-    public Requisites getRequisites() {
-        return requisites;
-    }
-
-    public void setRequisites(Requisites requisites) {
-        this.requisites = requisites;
-    }
-
     @Override
     public String toString() {
         return "Account{" +
@@ -108,7 +99,6 @@ public class Account {
                 ", name='" + name + '\'' +
                 ", limit=" + limit +
                 ", currency='" + currency + '\'' +
-                ", requisites=" + requisites +
                 ", state=" + state +
                 '}';
     }

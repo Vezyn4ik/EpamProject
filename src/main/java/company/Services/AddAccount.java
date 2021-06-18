@@ -18,7 +18,6 @@ public class AddAccount extends Command{
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
 
-        // obtain login and password from the request
         String name = request.getParameter("name");
         System.out.println("Request parameter: name --> " + name);
 
@@ -30,13 +29,6 @@ public class AddAccount extends Command{
 
         // error handler
         String errorMessage = null;
-        String forward = Path.PAGE_ERROR_PAGE;
-
-        /*if(new UserDao().findUserByLogin(login)!=null){
-            errorMessage = "User with such login is exists";
-            request.setAttribute("errorMessage", errorMessage);
-            return forward;
-        }*/
 
         Account account=new Account();
         account.setName(name);
@@ -44,10 +36,12 @@ public class AddAccount extends Command{
         account.setLimit(limit);
         account.setCurrency(currency);
         account.setUser((User) session.getAttribute("user"));
-
-        if(new AccountDao().insert(account)){
-            forward=new UserProfile().execute(request,response);
+        if(new AccountDao().findByName(name)!=null){
+            errorMessage = "Account with such name is exists";
+            request.setAttribute("errorMessage", errorMessage);
+        }else{
+            new AccountDao().insert(account);
         }
-        return forward;
+        return new UserProfile().execute(request,response);
     }
 }

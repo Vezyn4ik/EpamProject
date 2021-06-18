@@ -12,7 +12,7 @@ public class User {
     public String login;
     public String password;
     public Timestamp createTime;
-    public State state;
+    public Status status;
     public String telephone;
     public String email;
 
@@ -32,12 +32,12 @@ public class User {
         this.email = email;
     }
 
-    public State getState() {
-        return state;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setState(State state) {
-        this.state = state;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Long getId() {

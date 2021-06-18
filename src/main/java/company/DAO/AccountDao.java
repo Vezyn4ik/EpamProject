@@ -10,7 +10,12 @@ import java.util.List;
 
 public class AccountDao {
     private static final String SQL_ADD_ACCOUNT =
-            "INSERT INTO `account`(fk_user,create_time,`name`,`limit`,currency,fk_requisite) values(?,?,?,?,?,?)";
+            "INSERT INTO `account`(fk_user,create_time,`name`,`limit`,currency,fk_requisite,`state`) values(?,?,?,?,?,?,?)";
+    private static final String FIND_BY_ID = "Select * from account where id=?";
+    private static final String FIND_BY_USER = "Select * from account where fk_user=?";
+    private static final String FIND_BY_STATE = "Select * from account where state=?";
+    private static final String UPDATE_ACCOUNT = "UPDATE `account` set balance=?, `name`=?, `limit` =?, currency=?, `state`=? where id=?";
+    private static final String FIND_BY_NAME = "Select * from account where name=?";
 
     /**
      * Returns a user with the given identifier.
@@ -30,6 +35,7 @@ public class AccountDao {
             stmp.setDouble(4, account.getLimit());
             stmp.setString(5, account.getCurrency());
             stmp.setLong(6, 1);
+            stmp.setString(7, State.UNLOCKED.name());
             if (stmp.executeUpdate() > 0) {
                 try (ResultSet rs = stmp.getGeneratedKeys()) {
                     if (rs.next()) {
@@ -49,7 +55,7 @@ public class AccountDao {
 
     public Account findById(Long id) {
         try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement stmp = con.prepareStatement("Select * from account where id=?");
+             PreparedStatement stmp = con.prepareStatement(FIND_BY_ID);
         ) {
             stmp.setLong(1, id);
             ResultSet rs = stmp.executeQuery();
@@ -64,9 +70,9 @@ public class AccountDao {
 
     public List<Account> findAllByUser(User user) {
         List<Account> temp = new ArrayList<>();
-        AccountMapper accountMapper=new AccountMapper();
+        AccountMapper accountMapper = new AccountMapper();
         try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement stmp = con.prepareStatement("Select * from account where fk_user=?");
+             PreparedStatement stmp = con.prepareStatement(FIND_BY_USER);
         ) {
             stmp.setLong(1, user.getId());
             ResultSet rs = stmp.executeQuery();
@@ -79,11 +85,27 @@ public class AccountDao {
         return temp;
     }
 
+    public List<Account> findAllByState(State state) {
+        List<Account> temp = new ArrayList<>();
+        AccountMapper accountMapper = new AccountMapper();
+        try (Connection con = DBManager.getInstance().getConnection();
+             PreparedStatement stmp = con.prepareStatement(FIND_BY_STATE);
+        ) {
+            stmp.setString(1, state.name());
+            ResultSet rs = stmp.executeQuery();
+            while (rs.next()) {
+                temp.add(accountMapper.mapRow(rs));
+            }
+        } catch (SQLException throwables) {
+            System.out.println(throwables.getMessage());
+        }
+        return temp;
+    }
 
     public boolean update(Account account) {
         boolean res = false;
         try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement stmp = con.prepareStatement("UPDATE `account` set balance=?, `name`=?, `limit` =?, currency=?, `state`=? where id=?",
+             PreparedStatement stmp = con.prepareStatement(UPDATE_ACCOUNT,
                      Statement.RETURN_GENERATED_KEYS)
         ) {
             stmp.setDouble(1, account.getBalance());
@@ -105,7 +127,7 @@ public class AccountDao {
 
     public Account findByName(String name) {
         try (Connection con = DBManager.getInstance().getConnection();
-             PreparedStatement stmp = con.prepareStatement("Select * from account where name=?");
+             PreparedStatement stmp = con.prepareStatement(FIND_BY_NAME)
         ) {
             stmp.setString(1, name);
             ResultSet rs = stmp.executeQuery();
@@ -117,6 +139,7 @@ public class AccountDao {
         }
         return null;
     }
+
     private static class AccountMapper implements EntityMapper<Account> {
         public Account mapRow(ResultSet rs) {
             try {

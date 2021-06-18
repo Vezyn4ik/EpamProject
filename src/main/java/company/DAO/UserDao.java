@@ -2,6 +2,7 @@ package company.DAO;
 
 import company.Entity.Role;
 import company.Entity.State;
+import company.Entity.Status;
 import company.Entity.User;
 
 import java.sql.*;
@@ -132,7 +133,7 @@ public class UserDao {
             pstmt.setString(2, user.getSurname());
             pstmt.setDate(3, user.getBirth());
             pstmt.setString(4, user.getPassword());
-            pstmt.setString(5, user.getState().name());
+            pstmt.setString(5, user.getStatus().name());
             pstmt.setString(6, user.getEmail());
             pstmt.setLong(7, user.getId());
 
@@ -179,7 +180,7 @@ public class UserDao {
                 user.setPassword(rs.getString("password"));
                 user.setRole(Role.valueOf(rs.getString("role")));
                 user.setCreateTime(rs.getTimestamp("create_time"));
-                user.setState(State.valueOf(rs.getString("state")));
+                user.setStatus(Status.valueOf(rs.getString("state")));
                 user.setEmail(rs.getString("email"));
                 user.setTelephone(rs.getString("telephone"));
                 return user;

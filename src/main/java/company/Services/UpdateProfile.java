@@ -52,13 +52,6 @@ public class UpdateProfile extends Command{
             updateUser = true;
         }
 
-        String localeToSet = request.getParameter("localeToSet");
-        if (localeToSet != null && !localeToSet.isEmpty()) {
-            HttpSession session = request.getSession();
-            Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", localeToSet);
-            session.setAttribute("defaultLocale", localeToSet);
-        }
-
         if (updateUser) {
             new UserDao().updateUser(user);
         }

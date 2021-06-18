@@ -15,10 +15,10 @@
         </div>
         <c:if test="${fn:length(payments) > 0}">
         <div class="btn-group">
-            <button class="btn btn-lg btn-light" onclick="location.href='/controller?command=payments&accountId=${account.id}&sort=numberUp'" >numberup</button>
-            <button class="btn btn-lg btn-light" onclick="location.href='/controller?command=payments&accountId=${account.id}&sort=numberDown'">numberdown</button>
-            <button class="btn btn-lg btn-light" onclick="location.href='/controller?command=payments&accountId=${account.id}&sort=dateUp'"> dataup</button>
-            <button class="btn btn-lg btn-light" onclick="location.href='/controller?command=payments&accountId=${account.id}&sort=dateDown'">datadown</button>
+            <button class="btn btn-lg btn-light" onclick="location.href='/controller?command=payments&accountId=${account.id}&sort=numberUp'" ><fmt:message key="payments_jsp.label.sort_id_asc"/></button>
+            <button class="btn btn-lg btn-light" onclick="location.href='/controller?command=payments&accountId=${account.id}&sort=numberDown'"><fmt:message key="payments_jsp.label.sort_id_desc"/></button>
+            <button class="btn btn-lg btn-light" onclick="location.href='/controller?command=payments&accountId=${account.id}&sort=dateUp'"> <fmt:message key="payments_jsp.label.sort_date_asc"/></button>
+            <button class="btn btn-lg btn-light" onclick="location.href='/controller?command=payments&accountId=${account.id}&sort=dateDown'"><fmt:message key="payments_jsp.label.sort_date_desc"/></button>
         </div>
             <table class="table table-bordered table-striped">
                 <thead class="thead-dark">
@@ -45,7 +45,6 @@
                     <td><p>${payment.commission}</p></td>
                     <td><p>${payment.recipientAccount}</p></td>
                     <td><p>${payment.recipientName}</p></td>
-                    <td><p>${payment.status}</p></td>
                     </c:forEach>
                 </tr>
                 </tbody>

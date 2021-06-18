@@ -61,6 +61,9 @@
                     </a>
                     <button class="btn btn-info" style="horiz-align: right" type="submit"><fmt:message key="register_jsp.button.register"/>
                     </button>
+                    <c:if test="${not empty errorMessage}">
+                        <div class="alert alert-danger"> ${errorMessage} </div>
+                    </c:if>
                 </form>
             </div>
         </div>

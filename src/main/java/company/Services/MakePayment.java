@@ -2,8 +2,10 @@ package company.Services;
 
 import company.DAO.AccountDao;
 import company.DAO.PaymentDao;
-import company.DAO.UserDao;
-import company.Entity.*;
+import company.Entity.Account;
+import company.Entity.Category;
+import company.Entity.Payment;
+import company.Entity.State;
 import company.Path;
 
 import javax.servlet.ServletException;
@@ -11,10 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.Timestamp;
 
-public class MakePayment extends Command{
+public class MakePayment extends Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
@@ -37,28 +38,27 @@ public class MakePayment extends Command{
         // error handler
         String errorMessage = null;
         String forward = Path.PAGE_ERROR_PAGE;
-        if(amount*1.01>account.getBalance() || amount>account.getLimit()
-                ||account.getName().equals(recipient_account) || account.state==State.LOCKED){
+        if (amount * 1.01 > account.getBalance() || amount > account.getLimit()
+                || account.getName().equals(recipient_account) || account.state == State.LOCKED) {
             return forward;
         }
-        Payment payment=new Payment();
+        Payment payment = new Payment();
         payment.setRecipientName(recipient_name);
         payment.setRecipientAccount(recipient_account);
         payment.setAmount(amount);
-        payment.setCommission(amount*0.01);
+        payment.setCommission(amount * 0.01);
         payment.setPurpose(purpose);
         payment.setDate(new Timestamp(System.currentTimeMillis()));
         payment.setAccount(account);
         payment.setCategory(category);
-        payment.setStatus(Status.PREPARED);
 
-        if(new PaymentDao().insert(payment)){
-            account.withdrawal(amount*1.01);
+        if (new PaymentDao().insert(payment)) {
+            account.withdrawal(amount * 1.01);
             new AccountDao().update(account);
-            forward=Path.ACCOUNT;
+            forward = Path.ACCOUNT;
         }
-        Account recipient=new AccountDao().findByName(payment.getRecipientAccount());
-        if(recipient!=null){
+        Account recipient = new AccountDao().findByName(payment.getRecipientAccount());
+        if (recipient != null) {
             recipient.replenishment(payment.getAmount());
             new AccountDao().update(recipient);
         }

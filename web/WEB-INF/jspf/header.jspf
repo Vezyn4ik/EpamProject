@@ -3,7 +3,9 @@ Header (top area).
 ===========================================================================--%>
 <%@ include file="page.jspf" %>
 <%@ include file="taglib.jspf" %>
-<style><%@include file="../../style/header.css"%></style>
+<style>
+    <%@include file="../../style/header.css" %>
+</style>
 <div class="header">
     <div class="wrap">
         <div class="account_desc">
@@ -15,8 +17,13 @@ Header (top area).
                                 <fmt:message key="header_jspf.button.listUsers"/>
                             </a> &nbsp;
                         </li>
+                        <li>
+                            <a href="controller?command=apps">
+                                <fmt:message key="header_jspf.button.applications"/>
+                            </a> &nbsp;
+                        </li>
                     </c:when>
-                    <c:when test="${user.getRole()  == 'USER'}">
+                    <c:when test="${user.getRole()  == 'USER' and user.status=='UNLOCKED'}">
                         <li>
                             <a href="controller?command=toMakePayment">
                                 <fmt:message key="header_jspf.button.makePayment"/>
@@ -29,13 +36,32 @@ Header (top area).
                         <fmt:message key="header_jspf.button.login"/>
                     </a></li>
                 </c:if>
-                <c:if test="${not empty user}">
+                <c:if test="${not empty user and user.status=='UNLOCKED'}">
                     <li><c:out value="${user.name} ${user.surname} ${user.getRole()}"/></li>
-                    <li><a href="controller?command=userAccount"><fmt:message key="header_jspf.button.profile"/></a></li>
+                    <li><a href="controller?command=userAccount"><fmt:message key="header_jspf.button.profile"/></a>
+                    </li>
                     <li><a href="controller?command=logout">
                         <fmt:message key="header_jspf.button.logout"/>
                     </a></li>
                 </c:if>
+                <li>
+                    <form id="locale" action="controller"
+                          method="post">
+                        <input hidden name="command" value="selectLocale"/>
+
+                        <select name="localeToSet" onchange="this.form.submit()">
+
+                            <option value="${defaultLocale}">${defaultLocale}[Set]
+                            </option>
+                            <c:forEach var="localeName" items="${locales}">
+                                <c:if test="${localeName!=defaultLocale}">
+                                    <option value="${localeName}">${localeName}
+                                    </option>
+                                </c:if>
+                            </c:forEach>
+                        </select>
+                    </form>
+                </li>
             </ul>
         </div>
         <div class="clear"></div>

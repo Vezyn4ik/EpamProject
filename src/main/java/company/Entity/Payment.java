@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 public class Payment {
     public Long id;
     public Account account;
-    public Status status;
     public Category category;
     public Timestamp date;
     public String purpose;
@@ -29,14 +28,6 @@ public class Payment {
 
     public void setAccount(Account account) {
         this.account = account;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
     }
 
     public Category getCategory() {
