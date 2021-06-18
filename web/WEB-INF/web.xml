@@ -48,19 +48,19 @@
     <filter-class>company.web.filter.CommandAccessFilter</filter-class>
     <init-param>
       <param-name>admin</param-name>
-      <param-value>listOrders</param-value>
+      <param-value>userData listUsers apps</param-value>
     </init-param>
     <init-param>
-      <param-name>client</param-name>
-      <param-value>listMenu</param-value>
+      <param-name>user</param-name>
+      <param-value>toMakePayment makePayment </param-value>
     </init-param>
     <init-param>
       <param-name>common</param-name>
-      <param-value>logout noCommand viewSettings updateSettings</param-value>
+      <param-value>logout unlock lock payments addAccount updateProfile userAccount</param-value>
     </init-param>
     <init-param>
       <param-name>out-of-control</param-name>
-      <param-value>login</param-value>
+      <param-value>register login toRegister toLogin</param-value>
     </init-param>
   </filter>
 
