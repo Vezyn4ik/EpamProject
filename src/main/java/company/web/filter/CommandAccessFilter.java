@@ -1,4 +1,3 @@
-/*
 package company.web.filter;
 
 import java.io.IOException;
@@ -17,19 +16,17 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import company.Entity.Role;
+import company.Path;
 import org.apache.log4j.Logger;
 
-import ua.kharkov.knure.dkolesnikov.st4example.Path;
-import ua.kharkov.knure.dkolesnikov.st4example.db.Role;
 
-*/
 /**
  * Security filter. Disabled by default. Uncomment Security filter
  * section in web.xml to enable.
+ *
  * 
- * @author D.Kolesnikov
- * 
- *//*
+ */
 
 public class CommandAccessFilter implements Filter {
 	
@@ -58,7 +55,7 @@ public class CommandAccessFilter implements Filter {
 			request.setAttribute("errorMessage", errorMessasge);
 			log.trace("Set the request attribute: errorMessage --> " + errorMessasge);
 			
-			request.getRequestDispatcher(Path.PAGE__ERROR_PAGE)
+			request.getRequestDispatcher(Path.PAGE_LOGIN)
 					.forward(request, response);
 		}
 	}
@@ -90,7 +87,7 @@ public class CommandAccessFilter implements Filter {
 		
 		// roles
 		accessMap.put(Role.ADMIN, asList(fConfig.getInitParameter("admin")));
-		accessMap.put(Role.CLIENT, asList(fConfig.getInitParameter("client")));
+		accessMap.put(Role.USER, asList(fConfig.getInitParameter("user")));
 		log.trace("Access map --> " + accessMap);
 
 		// commons
@@ -104,14 +101,14 @@ public class CommandAccessFilter implements Filter {
 		log.debug("Filter initialization finished");
 	}
 	
-	*/
+
 /**
 	 * Extracts parameter values from string.
 	 * 
 	 * @param str
 	 *            parameter values string.
 	 * @return list of parameter values.
-	 *//*
+	 */
 
 	private List<String> asList(String str) {
 		List<String> list = new ArrayList<String>();
@@ -120,4 +117,4 @@ public class CommandAccessFilter implements Filter {
 		return list;		
 	}
 	
-}*/
+}
