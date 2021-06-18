@@ -97,11 +97,11 @@
                         <input class="form-control" name="limit" id="limit"
                                type="number" min="0" required/>
                     </div>
-                    <div class="form-group">
+                    <%--<div class="form-group">
                         <label for="currency"> <fmt:message key="profile_jsp.label.currency"/> </label>
                         <input class="form-control" name="currency" id="currency"
                                type="text" maxlength="3" required/>
-                    </div>
+                    </div>--%>
                     <div class="button_wrap">
                         <button class="btn-lg btn-info" type="submit"><fmt:message
                                 key="profile_jsp.button.addAccount"/>

@@ -25,7 +25,21 @@ public class PaymentDao {
         }
         return result;
     }
-
+    public List<Payment> findAllByRecipientAccount(String account){
+        List<Payment> result=new ArrayList<>();
+        try (Connection con = DBManager.getInstance().getConnection();
+             PreparedStatement stmp = con.prepareStatement("Select * from payment where recipient_account=?");
+        ) {
+            stmp.setString(1,account);
+            ResultSet rs= stmp.executeQuery();
+            while (rs.next()) {
+                result.add(mapPayment(rs));
+            }
+        } catch (SQLException throwables) {
+            System.out.println(throwables.getMessage());
+        }
+        return result;
+    }
     public Payment findById(Long id){
         try (Connection con = DBManager.getInstance().getConnection();
              PreparedStatement stmp = con.prepareStatement("Select * from payment where id=?");

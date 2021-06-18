@@ -24,7 +24,9 @@ public class Payments extends Command{
         List<Payment> payments;
         System.out.println(request.getParameter("accountId"));
         if(!request.getParameter("accountId").isEmpty()){
-            payments = paymentDao.findAllByAccount(new AccountDao().findById(Long.parseLong(request.getParameter("accountId"))));
+            Account account=new AccountDao().findById(Long.parseLong(request.getParameter("accountId")));
+            payments = paymentDao.findAllByAccount(account);
+            payments.addAll(paymentDao.findAllByRecipientAccount(account.getName()));
         }else {
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");

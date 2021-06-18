@@ -55,7 +55,7 @@ public class MakePayment extends Command {
         if (new PaymentDao().insert(payment)) {
             account.withdrawal(amount * 1.01);
             new AccountDao().update(account);
-            forward = Path.ACCOUNT;
+            forward = new UserProfile().execute(request,response);
         }
         Account recipient = new AccountDao().findByName(payment.getRecipientAccount());
         if (recipient != null) {

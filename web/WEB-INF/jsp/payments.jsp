@@ -31,7 +31,6 @@
                     <th scope="col"><fmt:message key="payments_jsp.label.commission"/></th>
                     <th scope="col"><fmt:message key="payments_jsp.label.recipient_account"/></th>
                     <th scope="col"><fmt:message key="payments_jsp.label.recipient_name"/></th>
-                    <th scope="col"><fmt:message key="payments_jsp.label.state"/></th>
                 </tr>
                 </thead>
                 <tbody>

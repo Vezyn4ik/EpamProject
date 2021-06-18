@@ -24,7 +24,7 @@ public class AddAccount extends Command{
         Double limit = Double.valueOf(request.getParameter("limit"));
         System.out.println("Request parameter: limit --> " + limit);
 
-        String currency = request.getParameter("currency");
+        String currency = "UAH";
         System.out.println("Request parameter: currency --> " + currency);
 
         // error handler
