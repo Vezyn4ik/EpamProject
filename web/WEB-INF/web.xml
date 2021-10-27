@@ -43,7 +43,7 @@
     <listener-class>company.web.listener.ContextListener</listener-class>
   </listener>
 
-  <filter>
+  <!--<filter>
     <filter-name>CommandAccessFilter</filter-name>
     <filter-class>company.web.filter.CommandAccessFilter</filter-class>
     <init-param>
@@ -67,5 +67,5 @@
   <filter-mapping>
     <filter-name>CommandAccessFilter</filter-name>
     <servlet-name>Controller</servlet-name>
-  </filter-mapping>
+  </filter-mapping>-->
 </web-app>

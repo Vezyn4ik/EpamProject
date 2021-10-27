@@ -16,6 +16,16 @@ public class User {
     public String telephone;
     public String email;
 
+    public Integer countAccounts;
+
+    public Integer getCountAccounts() {
+        return countAccounts;
+    }
+
+    public void setCountAccounts(Integer countAccounts) {
+        this.countAccounts = countAccounts;
+    }
+
     public String getTelephone() {
         return telephone;
     }

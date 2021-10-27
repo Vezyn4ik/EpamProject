@@ -20,13 +20,13 @@
             <p><fmt:message key="user_data_jsp.label.email"/>${viewedUser.email}</p>
             <p><fmt:message key="user_data_jsp.label.birth"/> ${viewedUser.birth}</p>
             <p><fmt:message key="user_data_jsp.label.createTime"/> ${viewedUser.createTime}</p>
-
-            <c:if test="${viewedUser.state=='LOCKED'}">
+<p> <th scope="col"><fmt:message key="user_data_jsp.label.count"/> ${viewedUser.countAccounts}</th></p>
+            <c:if test="${viewedUser.status=='LOCKED'}">
                 <a class="btn btn-success"
                    href="controller?command=unlock&type=user&userId=${viewedUser.id}&page=user_data"> <fmt:message
                         key="user_data_jsp.button.block"/></a>
             </c:if>
-            <c:if test="${viewedUser.state=='UNLOCKED'}">
+            <c:if test="${viewedUser.status=='UNLOCKED'}">
                 <a class="btn btn-danger"
                    href="controller?command=lock&type=user&userId=${viewedUser.id}&page=user_data"> <fmt:message
                         key="user_data_jsp.button.unblock"/></a>

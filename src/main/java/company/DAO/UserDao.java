@@ -15,12 +15,21 @@ public class UserDao {
             "SELECT * FROM user WHERE login=?";
 
     private static final String SQL_FIND_USER_BY_ID =
-            "SELECT * FROM user WHERE id=?";
+            "Select u.id,u.name,surname,birth,login,password,role, " +
+                    "u.create_time,u.state,telephone,email,count(*) as count_accounts " +
+                    "from user u join account a " +
+                    "on(u.id=a.fk_user)" +
+                    "where role ='USER' and u.id=?  group by u.id;";
 
     private static final String SQL_UPDATE_USER =
             "UPDATE `user` SET `name`=?, surname=?,birth=?, password=? ,`state`=?,email=? WHERE id=?";
 
-    private static final String SQL_FIND_ALL_USERS="Select * from user where role ='USER'";
+    private static final String SQL_FIND_ALL_USERS=
+                 "Select u.id,u.name,surname,birth,login,password,role, " +
+                         "u.create_time,u.state,telephone,email,count(*) as count_accounts " +
+                         "from user u join account a " +
+                         "on(u.id=a.fk_user)" +
+                         "where role ='USER'  group by u.id;";
     private static final String SQL_INSERT_USER=
             "Insert into user(name,surname,birth,login,password,role,create_time,state,telephone,email) " +
             "values(?,?,?,?,?,?,?,default,?,?)";
@@ -137,9 +146,7 @@ public class UserDao {
             pstmt.setString(6, user.getEmail());
             pstmt.setLong(7, user.getId());
 
-            System.out.println("UpdateUser1");
             if (pstmt.executeUpdate() > 0) {
-                System.out.println("UpdateUser2");
             }
             con.commit();
             con.close();
@@ -183,6 +190,12 @@ public class UserDao {
                 user.setStatus(Status.valueOf(rs.getString("state")));
                 user.setEmail(rs.getString("email"));
                 user.setTelephone(rs.getString("telephone"));
+                try{
+                    user.setCountAccounts(Integer.parseInt(rs.getString("count_accounts")));
+                }
+                catch (SQLException e){
+                    System.out.println(e);
+                }
                 return user;
             } catch (SQLException e) {
                 throw new IllegalStateException(e);

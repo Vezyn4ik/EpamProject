@@ -22,6 +22,7 @@
                         <th scope="col"><fmt:message key="list_users_jsp.label.login"/></th>
                         <th scope="col"><fmt:message key="list_users_jsp.label.createTime"/></th>
                         <th scope="col"><fmt:message key="list_users_jsp.label.state"/></th>
+                        <th scope="col"><fmt:message key="list_users_jsp.label.count"/></th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
@@ -33,6 +34,7 @@
                             <td>${user.login}</td>
                             <td>${user.createTime}</td>
                             <td>${user.status}</td>
+                            <td>${user.countAccounts}</td>
                             <td><c:if test="${user.status=='LOCKED'}">
                                 <a class="btn btn-success"
                                    href="controller?command=unlock&type=user&userId=${user.id}&page=list_users">
